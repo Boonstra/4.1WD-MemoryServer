@@ -1,10 +1,18 @@
-var express  = require('express'),
-    routes   = require('./routes'),
-    http     = require('http'),
-    path     = require('path'),
-    app      = express(),
-	server   = http.createServer(app),
-	socketIO = require('socket.io').listen(server);
+var express    = require('express'),
+    routes     = require('./routes'),
+    http       = require('http'),
+    path       = require('path'),
+    app        = express(),
+	server     = http.createServer(app),
+	socketIO   = require('socket.io').listen(server),
+	mysql      = require('mysql'),
+	connection = mysql.createConnection(
+	{
+		host     : 'localhost',
+		user     : 'root',
+		password : '',
+		database : 'memory'
+	});
 
 // Settings
 app.set('port', process.env.PORT || 3000);
@@ -29,11 +37,24 @@ app.get('/', routes.index);
 
 // Start server
 server.listen(app.get('port'));
+connection.connect();
 
 // Socket IO
-socketIO.sockets.on('connection', function (socket) {
+socketIO.sockets.on('connection', function (socket)
+{
 	socket.emit('news', { hello: 'world' });
-	socket.on('my other event', function (data) {
+	socket.on('my other event', function (data)
+	{
 		console.log(data);
 	});
+
+	setInterval(function()
+	{
+		connection.query('SELECT * FROM high_scores LIMIT 0, 10', function(err, rows)
+		{
+//			connection.release();
+
+			socket.emit('highScores', rows)
+		});
+	}, 5000);
 });
