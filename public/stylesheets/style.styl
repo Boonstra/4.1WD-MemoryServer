@@ -1,12 +1,52 @@
-@black: #2f313d;
-@yellow: #fec56c;
-@red: #d28365;
-@green: #539d84;
-@blue: #427383;
+// Rounded corners
+rounded-corners($radius = 5px)
+  border-radius: $radius;
 
-@white     : #fff;
-@light-grey: #eee;
-@grey      : #ccc;
+// Perspective
+perspective($perspective = 1000)
+  -webkit-perspective: $perspective;
+  -moz-perspective: $perspective;
+  -ms-perspective: $perspective;
+  perspective: $perspective;
+
+// Transform
+transform($transform = rotateY(180deg))
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+
+// Transition
+transition($time = 0.6s)
+  -webkit-transition: $time;
+  -moz-transition: $time;
+  -ms-transition: $time;
+  -o-transition: $time;
+  transition: $time;
+
+// Transform style
+transform-style($method = preserve-3d)
+  -webkit-transform-style: $method;
+  -moz-transform-style: $method;
+  -ms-transform-style: $method;
+  transform-style: $method;
+
+// Backface visibility
+backface-visibility($visibility = hidden)
+  -webkit-backface-visibility: $visibility;
+  -moz-backface-visibility: $visibility;
+  -ms-backface-visibility: $visibility;
+  backface-visibility: $visibility;
+
+$black = #2f313d;
+$yellow = #fec56c;
+$red = #d28365;
+$green = #539d84;
+$blue = #427383;
+$white = #fff;
+$light-grey = #eee;
+$grey = #ccc;
 
 html,
 body
@@ -14,11 +54,11 @@ body
   margin: 0;
   padding: 0;
 
-  color: @black;
+  color: $black;
 
   font-family: "Helvetica Neue", Arial, Helvetica, "Nimbus Sans L", sans-serif;
 
-  background: @black;
+  background: $black;
 
   .wrapper
   {
@@ -26,43 +66,43 @@ body
 
     margin: 0 auto;
 
-	h3
-	{
-	  text-align: center;
-	}
+    h3
+    {
+      text-align: center;
+    }
 
-	.box
-	{
-	  margin: 10px 5px;
-	  padding: 10px;
+    .box
+    {
+      margin: 10px 5px;
+      padding: 10px;
 
-	  .rounded-corners;
+      rounded-corners();
 
-	  &.red
-	  {
-		background: @red;
-	  }
+      &.red
+      {
+        background: $red;
+      }
 
-	  &.green
-	  {
-		background: @green;
-	  }
+      &.green
+      {
+        background: $green;
+      }
 
-	  &.yellow
-	  {
-		background: @yellow;
-	  }
+      &.yellow
+      {
+        background: $yellow;
+      }
 
-	  &.blue
-	  {
-		background: @blue;
-	  }
+      &.blue
+      {
+        background: $blue;
+      }
 
-	  &.black
-	  {
-		background: @black;
-	  }
-	}
+      &.black
+      {
+        background: $black;
+      }
+    }
 
     .sidebar
     {
@@ -70,149 +110,149 @@ body
 
       float: left;
 
-	  .row
-	  {
-		margin: 5px 0;
+      .row
+      {
+        margin: 5px 0;
 
-		text-align: center;
+        text-align: center;
 
-		input
-		{
-		  width: 100%;
-		}
-	  }
+        input
+        {
+          width: 100%;
+        }
+      }
 
-	  .loading-bar-container
-	  {
-		position: relative;
+      .loading-bar-container
+      {
+        position: relative;
 
-		.loading-bar-progress
-		{
-		  width: 0px;
-		  height: 20px;
+        .loading-bar-progress
+        {
+          width: 0px;
+          height: 20px;
 
-		  padding: 0;
-		  margin: 0;
+          padding: 0;
+          margin: 0;
 
-		  position: absolute;
+          position: absolute;
 
-		  top: 20px;
-		  left: 14px;
-		}
-	  }
+          top: 20px;
+          left: 14px;
+        }
+      }
     }
 
     .main
     {
-	  position: relative;
+      position: relative;
 
       width: 660px;
 
       float: left;
 
-	  overflow: hidden;
+      overflow: hidden;
 
-      .rounded-corners;
+      rounded-corners();
 
       .board
       {
-		.card-container
-		{
-		  .perspective(1000);
+        .card-container
+        {
+          perspective(1000);
 
-		  margin: 10px;
+          margin: 10px;
 
-		  float: left;
+          float: left;
 
-		  font-size: 2em;
+          font-size: 2em;
 
-		  text-align: center;
-		  line-height: 137px;
+          text-align: center;
+          line-height: 137px;
 
-		  &.flipped .card-flipper
-		  {
-			.transform(rotateY(180deg));
-		  }
+          &.flipped .card-flipper
+          {
+            transform(rotateY(180deg));
+          }
 
-		  &, .card-front, .card-back
-		  {
-			width: 137px;
-			height: 137px;
-		  }
+          &, .card-front, .card-back
+          {
+            width: 137px;
+            height: 137px;
+          }
 
-		  .card-flipper
-		  {
-			.transition(0.6s);
+          .card-flipper
+          {
+            transition(0.6s);
 
-			.transform-style(preserve-3d);
+            transform-style(preserve-3d);
 
-			position: relative;
-		  }
+            position: relative;
+          }
 
-		  .card-front, .card-back
-		  {
-			.backface-visibility(hidden);
+          .card-front, .card-back
+          {
+            backface-visibility(hidden);
 
-			border: 0 @black solid;
-			border-right-width: 1px;
-			border-bottom-width: 1px;
+            border: 0 $black solid;
+            border-right-width: 1px;
+            border-bottom-width: 1px;
 
-			.rounded-corners;
+            rounded-corners();
 
-			position: absolute;
-			top: 0;
-			left: 0;
-		  }
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
 
-		  .card-front
-		  {
-			z-index: 2;
+          .card-front
+          {
+            z-index: 2;
 
-			background: @green;
-		  }
+            background: $green;
+          }
 
-		  .card-back
-		  {
-			background: @yellow;
+          .card-back
+          {
+            background: $yellow;
 
-			.transform(rotateY(180deg));
-		  }
-		}
+            transform(rotateY(180deg));
+          }
+        }
       }
 
-	  .end-of-game-screen
-	  {
-		position: absolute;
+      .end-of-game-screen
+      {
+        position: absolute;
 
-		top: 0;
-		left: 0;
+        top: 0;
+        left: 0;
 
-		height: 0;
+        height: 0;
 
-		padding: 0;
+        padding: 0;
 
-		overflow: hidden;
+        overflow: hidden;
 
-		text-align: center;
+        text-align: center;
 
-		.total-score,
-		.total-play-time
-		{
-		  line-height: 1.5em;
+        .total-score,
+        .total-play-time
+        {
+          line-height: 1.5em;
 
-		  font-size: 2em;
+          font-size: 2em;
 
-		  color: @yellow;
-		}
+          color: $yellow;
+        }
 
-		.total-score-container,
-		.total-play-time-container
-		{
-		  float: left;
+        .total-score-container,
+        .total-play-time-container
+        {
+          float: left;
 
-		  width: 50%;
-		}
-	  }
+          width: 50%;
+        }
+      }
     }
   }
 }
@@ -221,57 +261,4 @@ body
 .clear
 {
   clear: both;
-}
-
-// Rounded corners
-.rounded-corners(@radius: 5px;)
-{
-  border-radius: @radius;
-}
-
-// Perspective
-.perspective(@perspective: 1000)
-{
-  -webkit-perspective: @perspective;
-  -moz-perspective: @perspective;
-  -ms-perspective: @perspective;
-  perspective: @perspective;
-}
-
-// Transform
-.transform(@transform: rotateY(180deg))
-{
-  -webkit-transform: @transform;
-  -moz-transform: @transform;
-  -ms-transform: @transform;
-  -o-transform: @transform;
-  transform: @transform;
-}
-
-// Transition
-.transition(@time: 0.6s)
-{
-  -webkit-transition: @time;
-  -moz-transition: @time;
-  -ms-transition: @time;
-  -o-transition: @time;
-  transition: @time;
-}
-
-// Transform style
-.transform-style(@method: preserve-3d)
-{
-  -webkit-transform-style: @method;
-  -moz-transform-style: @method;
-  -ms-transform-style: @method;
-  transform-style: @method;
-}
-
-// Backface visibility
-.backface-visibility(@visibility: hidden)
-{
-  -webkit-backface-visibility: @visibility;
-  -moz-backface-visibility: @visibility;
-  -ms-backface-visibility: @visibility;
-  backface-visibility: @visibility;
 }

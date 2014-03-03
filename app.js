@@ -1,16 +1,12 @@
+var express  = require('express'),
+    routes   = require('./routes'),
+    http     = require('http'),
+    path     = require('path'),
+    app      = express(),
+	server   = http.createServer(app),
+	socketIO = require('socket.io').listen(server);
 
-/**
- * Module dependencies.
- */
-
-var express = require('express'),
-    routes  = require('./routes'),
-    user    = require('./routes/user'),
-    http    = require('http'),
-    path    = require('path'),
-    app     = express();
-
-// all environments
+// Settings
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -23,14 +19,21 @@ app.use(app.router);
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// development only
+// Development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+// Routes
 app.get('/', routes.index);
-app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+// Start server
+server.listen(app.get('port'));
+
+// Socket IO
+socketIO.sockets.on('connection', function (socket) {
+	socket.emit('news', { hello: 'world' });
+	socket.on('my other event', function (data) {
+		console.log(data);
+	});
 });
