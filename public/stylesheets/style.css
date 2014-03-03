@@ -15,6 +15,14 @@ html .wrapper h3,
 body .wrapper h3 {
   text-align: center;
 }
+html .wrapper table,
+body .wrapper table {
+  width: 100%;
+}
+html .wrapper table th,
+body .wrapper table th {
+  text-align: left;
+}
 html .wrapper .box,
 body .wrapper .box {
   margin: 10px 5px;

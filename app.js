@@ -48,13 +48,15 @@ socketIO.sockets.on('connection', function (socket)
 		console.log(data);
 	});
 
-	setInterval(function()
+	function sendHighScores()
 	{
 		connection.query('SELECT * FROM high_scores LIMIT 0, 10', function(err, rows)
 		{
-//			connection.release();
-
-			socket.emit('highScores', rows)
+			socket.emit('highScores', rows);
 		});
-	}, 5000);
+	}
+
+	sendHighScores();
+
+	setInterval(function(){ sendHighScores(); }, 5000);
 });

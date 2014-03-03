@@ -6,7 +6,7 @@ socket.on('news', function (data)
 	socket.emit('my other event', { my: 'data' });
 });
 
-socket.on('highScores', function (data)
-{
-	console.log(data);
-});
+//socket.on('highScores', function (data)
+//{
+//	console.log(data);
+//});
