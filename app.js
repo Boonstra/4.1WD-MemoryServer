@@ -42,15 +42,25 @@ connection.connect();
 // Socket IO
 socketIO.sockets.on('connection', function (socket)
 {
-	socket.emit('news', { hello: 'world' });
-	socket.on('my other event', function (data)
+	// Listen for a submitted score
+	socket.on('submitScore', function (score)
 	{
-		console.log(data);
+		if (typeof score === 'object' &&
+			typeof score.name === 'string' &&
+			typeof score.score === 'number' &&
+			typeof score.time === 'number' &&
+			score.name.length > 0 &&
+			score.score > 0 &&
+			score.time > 0)
+		{
+			connection.query('INSERT INTO high_scores(name, score, time) VALUES("' + score.name + '", ' + score.score + ', ' + score.time + ')');
+		}
 	});
 
+	// Sends the highest scores
 	function sendHighScores()
 	{
-		connection.query('SELECT * FROM high_scores LIMIT 0, 10', function(err, rows)
+		connection.query('SELECT * FROM high_scores ORDER BY score, time LIMIT 0, 10', function(err, rows)
 		{
 			socket.emit('highScores', rows);
 		});
@@ -58,5 +68,6 @@ socketIO.sockets.on('connection', function (socket)
 
 	sendHighScores();
 
+	// Periodically send high scores
 	setInterval(function(){ sendHighScores(); }, 5000);
 });

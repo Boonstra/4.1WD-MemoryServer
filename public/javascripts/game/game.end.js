@@ -19,11 +19,16 @@
 	{
 		var $endOfGameScreenContent       = this.$endOfGameScreen.getElement('.end-of-game-screen-content'),
 			$winnerPlayerNameField        = this.$endOfGameScreen.getElement('.winner-player-name'),
+
 			$totalPlayTimeContainer       = this.$endOfGameScreen.getElement('.total-play-time-container'),
 			$totalPlayTimeField           = $totalPlayTimeContainer.getElement('.total-play-time'),
+
 			$totalScoreContainer          = this.$endOfGameScreen.getElement('.total-score-container'),
 			$totalScoreField              = $totalScoreContainer.getElement('.total-score'),
+
 			highestScore                  = -1,
+			time                          = Math.round((((new Date).getTime() / 1000) - this.startTime) * 100) / 100,
+
 			playersWithHighestScore       = [],
 			playersWithHighestScoreString = ' ',
 			playerIndex;
@@ -58,8 +63,11 @@
 			break;
 		}
 
+		this.endOfGameScore = highestScore;
+		this.endOfGameTime  = time;
+
 		$winnerPlayerNameField.set('text', playersWithHighestScoreString);
-		$totalPlayTimeField.set('text', Math.round((((new Date).getTime() / 1000) - this.startTime) * 100) / 100);
+		$totalPlayTimeField.set('text', time);
 		$totalScoreField.set('text', highestScore);
 
 		this.$endOfGameScreen.setStyle('width' , this.$board.getSize()[0].x);
@@ -73,6 +81,24 @@
 			transition: 'bounce:out',
 			property  : 'top'
 		}).start(-this.$board.getSize()[0].y, 0);
+	};
+
+	/**
+	 * Send name, score and time of winning player to the server
+	 *
+	 * @param name
+	 * @param score
+	 * @param time
+	 */
+	self.Game.prototype.submitScore = function(name, score, time)
+	{
+		new Fx.Tween(this.$winnerPlayerNameContainer[0], {
+			duration  : 200,
+			transition: 'linear',
+			property  : 'height'
+		}).start(this.$winnerPlayerNameContainer.getSize()[0].y, 0);
+
+		socket.emit('submitScore', { name: name, score: score, time: time });
 	};
 
 	/**

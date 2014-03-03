@@ -12,8 +12,6 @@ memoryScript = function()
 		self.startNewGame();
 
 		self.openSocket();
-
-		self.currentGame.endOfGame();
 	};
 
 	/**
