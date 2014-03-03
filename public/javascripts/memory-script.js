@@ -11,7 +11,9 @@ memoryScript = function()
 
 		self.startNewGame();
 
-		self.listenOnSocket();
+		self.openSocket();
+
+		self.currentGame.endOfGame();
 	};
 
 	/**
@@ -25,11 +27,11 @@ memoryScript = function()
 	/**
 	 * Open an IO socket
 	 */
-	self.listenOnSocket = function()
+	self.openSocket = function()
 	{
-		var socket = io.connect('http://localhost:3000');
+		self.socket = io.connect('http://localhost:3000');
 
-		socket.on('highScores', function (highScores)
+		self.socket.on('highScores', function (highScores)
 		{
 			self.updateHighScoresList(highScores);
 		});

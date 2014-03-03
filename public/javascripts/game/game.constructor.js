@@ -34,7 +34,7 @@
 		this.$playerScores.set('text', '');
 
 		this.players.push(new self.Player('Player 1'));
-		this.players.push(new self.Player('Player 2'));
+//		this.players.push(new self.Player('Player 2'));
 
 		this.currentPlayerIndex = Math.floor(Math.random() * this.players.length);
 

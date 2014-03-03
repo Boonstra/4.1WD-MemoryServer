@@ -38,6 +38,10 @@ html
               | Congratulations
               span.winner-player-name
               | !
+            .winner-name-container
+              label(for='winner-name-field') Your name
+              input#winner-name-field.winner-name-field(type='text')
+              input.winner-name-button(type='button', value='Submit')
             .total-play-time-container
               strong You've won in
               br

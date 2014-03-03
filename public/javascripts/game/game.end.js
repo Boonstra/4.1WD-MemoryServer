@@ -25,7 +25,7 @@
 			$totalScoreField              = $totalScoreContainer.getElement('.total-score'),
 			highestScore                  = -1,
 			playersWithHighestScore       = [],
-			playersWithHighestScoreString = '',
+			playersWithHighestScoreString = ' ',
 			playerIndex;
 
 		// Determine winner

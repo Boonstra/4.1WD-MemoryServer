@@ -167,6 +167,10 @@ body .wrapper .main .end-of-game-screen {
   overflow: hidden;
   text-align: center;
 }
+html .wrapper .main .end-of-game-screen .winner-name-container,
+body .wrapper .main .end-of-game-screen .winner-name-container {
+  margin-bottom: 20px;
+}
 html .wrapper .main .end-of-game-screen .total-score,
 body .wrapper .main .end-of-game-screen .total-score,
 html .wrapper .main .end-of-game-screen .total-play-time,
