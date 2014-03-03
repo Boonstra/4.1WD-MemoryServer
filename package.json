@@ -1,12 +1,14 @@
 {
-  "name": "application-name",
-  "version": "0.0.1",
+  "name": "4.1WD-MemoryServer",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
     "express": "3.4.8",
+    "nodemon": "*",
+	"socket.io": "*",
     "jade": "*",
     "stylus": "*"
   }

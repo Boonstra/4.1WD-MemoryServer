@@ -1,5 +1,49 @@
-extends layout
-
-block content
-  h1= title
-  p Welcome to #{title}
+doctype html
+html
+  head
+    title Memory
+    link(rel='stylesheet', type='text/css', href='stylesheets/style.css')
+    script(type='text/javascript', src='javascripts/min/mootools-core-1.4.5-full-nocompat.js')
+    script(type='text/javascript', src='javascripts/min/memory-script.min.js')
+  body
+    .wrapper
+      .sidebar
+        .box.yellow
+          h3 Memory
+          .row
+            label(for='turn-time-slider')
+              | Turn time:
+              span.turn-time-slider-value 5
+              | seconds
+            br
+            input#turn-time-slider.turn-time-slider(type='range', value='5000', min='1000', max='10000')
+        .box.green
+          h3
+            span.current-player-name
+            | 's turn
+          .row.player-scores
+        .box.yellow.loading-bar-container
+          .box.black.loading-bar-background
+          .box.red.loading-bar-progress
+      .main
+        .box.red.board
+        .box.blue.end-of-game-screen
+          .end-of-game-screen-content
+            h2
+              | Congratulations
+              span.winner-player-name
+              | !
+            .total-play-time-container
+              strong You've won in
+              br
+              span.total-play-time
+              br
+              strong seconds
+            .total-score-container
+              strong With
+              br
+              span.total-score
+              br
+              strong points
+            .clear
+      .clear
